@@ -1,0 +1,40 @@
+/* Styles de base pour la carte */
+div[role="grid"] {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+/* Styles pour les lignes de la carte */
+div[role="row"] {
+    display: flex;
+    gap: 5px;
+}
+
+/* Styles pour les cellules de la carte */
+div[role="cell"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+/* Styles spécifiques pour chaque type de cellule */
+div[role="cell"].plain {
+    background-color: #a3d9a3;
+}
+
+div[role="cell"].mountain {
+    background-color: #757575;
+}
+
+div[role="cell"].treasure {
+    background-color: #ffd700;
+}
+
+div[role="cell"].adventurer {
+    background-color: #0000ff;
+}

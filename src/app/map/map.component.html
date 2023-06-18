@@ -1,0 +1,35 @@
+<div style="display: flex; justify-content: center; align-items: center; margin: 12px;">
+    <div role="grid">
+        <div *ngFor="let row of map; let y = index" role="row">
+            <div
+                *ngFor="let cell of row; let x = index"
+                [ngClass]="getCellStyle(cell, x, y)"
+                role="cell"
+            >
+                <div *ngIf="cell === 'P'">.</div>
+                <div *ngIf="cell === 'M'">M</div>
+                <div *ngIf="cell?.type === 'T'">T({{ cell.treasures }})</div>
+                <div *ngFor="let adventurer of adventurers">
+                    <div *ngIf="adventurer.x === x && adventurer.y === y">
+                        {{ adventurer.name }}
+                        <span *ngIf="adventurer.orientation === 'N'"
+                            >&uarr;</span
+                        >
+                        <span *ngIf="adventurer.orientation === 'S'"
+                            >&darr;</span
+                        >
+                        <span *ngIf="adventurer.orientation === 'E'"
+                            >&rarr;</span
+                        >
+                        <span *ngIf="adventurer.orientation === 'W'"
+                            >&larr;</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    {{ this.simulateAdventure() }}
+</div>
