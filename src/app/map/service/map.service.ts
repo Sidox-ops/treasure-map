@@ -8,7 +8,8 @@ import { AdventureService } from 'src/app/adventurer/service/adventurer.service'
 export class MapService {
   private mapSubject = new Subject<any[][]>();
   map$ = this.mapSubject.asObservable();
-
+  private mapLoadedSource = new Subject<void>();
+  mapLoaded$ = this.mapLoadedSource.asObservable();
   map!: any[][];
   adventurers: any[] = [];
 
@@ -41,11 +42,7 @@ export class MapService {
       }
     }
     this.mapSubject.next(this.map); // Notifier de la nouvelle carte
-  }
-
-
-  getMap() {
-    return this.map;
+    this.mapLoadedSource.next(); // Indiquer que la carte est chargée
   }
 
   createMap(width: number, height: number) {
@@ -76,6 +73,42 @@ export class MapService {
   addAdventurer(name: string, x: number, y: number, orientation: string, sequence: string) {
     const movements = sequence.split('');
     this.adventureService.addAdventurer(name, x, y, orientation, movements);
+  }
+
+  getNextPosition(x: number, y: number, orientation: string) {
+    switch (orientation) {
+      case 'N':
+        return { x: x, y: y - 1 };
+      case 'S':
+        return { x: x, y: y + 1 };
+      case 'E':
+        return { x: x + 1, y: y };
+      case 'W':
+        return { x: x - 1, y: y };
+      default:
+        return { x: x, y: y };
+    }
+  }
+
+  isValidMove(x: number, y: number) {
+    return (
+      x >= 0 &&
+      y >= 0 &&
+      y < this.map.length &&
+      x < this.map[0].length &&
+      (this.map[y][x] === '.' || (this.map[y][x].type && this.map[y][x].type === 'T'))
+    );
+  }
+
+  updateOrientation(currentOrientation: string, turn: string) {
+    const orientations = ['N', 'E', 'S', 'W'];
+    let currentIndex = orientations.indexOf(currentOrientation);
+    if (turn === 'D') {
+      currentIndex = (currentIndex + 1) % orientations.length;
+    } else if (turn === 'G') {
+      currentIndex = (currentIndex - 1 + orientations.length) % orientations.length;
+    }
+    return orientations[currentIndex];
   }
 
 }

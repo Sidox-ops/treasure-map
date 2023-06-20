@@ -1,4 +1,11 @@
-<div style="display: flex; justify-content: center; align-items: center; margin: 12px;">
+<div
+    style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 12px;
+    "
+>
     <div role="grid">
         <div *ngFor="let row of map; let y = index" role="row">
             <div
@@ -31,5 +38,5 @@
     </div>
 </div>
 <div>
-    {{ this.simulateAdventure() }}
+    {{ this.adventureResult }}
 </div>
