@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MapService } from './service/map.service';
 import { AdventureService } from '../adventurer/service/adventurer.service';
 import { combineLatest } from 'rxjs';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +15,7 @@ export class MapComponent implements OnInit {
   adventurers!: any[];
   result!: string;
   adventureResult: string = '';
+  adventureForm!: FormGroup;
 
 
   constructor(
@@ -22,6 +24,15 @@ export class MapComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.adventureForm = new FormGroup({
+      adventureText: new FormControl('', [
+        Validators.required,
+        this.hasAdventurerValidator
+      ])
+    });
+    this.adventureForm = new FormGroup({
+      'adventureText': new FormControl(null, [Validators.required, this.adventureValidator])
+    });
     combineLatest([
       this.mapService.map$,
       this.adventureService.adventurers$,
@@ -86,7 +97,39 @@ export class MapComponent implements OnInit {
     return 'Quelle belle aventure ! ' + _adventurer.name + ' a trouvé ' + _adventurer.treasures + ' trésors ! ' + _adventurer.name + " nous attend au point d'extraction " + _adventurer.x + '-' + _adventurer.y + ' !';
   }
 
+  hasAdventurerValidator(control: AbstractControl): { [key: string]: any } | null {
+    const valid = control.value.split('\n').some((line: string) => line.startsWith('A - '));
+    return valid ? null : { 'noAdventurer': { value: control.value } };
+  }
+
+  adventureValidator(control: AbstractControl): { [key: string]: any } | null {
+    const value = control.value;
+    if (value === null || value === undefined) {
+      return { 'noAdventurer': { value: 'No text provided' } };
+    }
+
+    const lines = value.split('\n');
+    const hasAdventurer = lines.some((line: string) => line.startsWith('A - '));
+    const hasTreasure = lines.some((line: string) => line.startsWith('T - '));
+
+    if (!hasAdventurer) {
+      return { 'noAdventurer': { value: 'No adventurer provided' } };
+    }
+
+    if (!hasTreasure) {
+      return { 'noTreasure': { value: 'No treasure provided' } };
+    }
+
+    return null;
+  }
 
 
+  onSubmit() {
+    if (this.adventureForm.valid) {
+      const adventureText = this.adventureForm.value.adventureText;
+      this.mapService.initializeFromText(adventureText);
+      this.adventureService.initializeFromText(adventureText);
+    }
+  }
 
 }

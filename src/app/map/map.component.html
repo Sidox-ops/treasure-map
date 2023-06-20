@@ -6,6 +6,18 @@
         margin: 12px;
     "
 >
+<form [formGroup]="adventureForm" (ngSubmit)="onSubmit()">
+  <textarea formControlName="adventureText"></textarea>
+  <button type="submit">Start Adventure</button>
+</form>
+
+<div *ngIf="adventureForm.get('adventureText')?.errors?.['noAdventurer']">
+  You must have at least one adventurer.
+</div>
+<div *ngIf="adventureForm.get('adventureText')?.errors?.['noTreasure']">
+  You must have at least one treasure.
+</div>
+
     <div role="grid">
         <div *ngFor="let row of map; let y = index" role="row">
             <div
