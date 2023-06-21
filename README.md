@@ -1,27 +1,31 @@
-# TreasureMap
+# Projet Treasure Map
+Ce projet est une application de cartographie de trésors. Il permet de créer une carte, d'ajouter des montagnes, des trésors et des aventuriers, et de simuler leur déplacement pour récupérer les trésors.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+## Organisation des composants
+L'application est organisée en plusieurs composants :
 
-## Development server
+- `MapComponent` : Composant principal qui affiche la carte et gère les interactions avec l'utilisateur.
+- `InputFileComponent` : Composant qui permet de charger un fichier texte pour initialiser la carte, les montagnes, les trésors et les aventuriers.
+- `AdventurerComponent` : Composant qui affiche les informations sur les aventuriers et leur déplacement.
+- `MapService` : Service qui gère la logique métier liée à la carte, aux montagnes, aux trésors et aux aventuriers.
+- `AdventurerService` : Pour initialiser l'aventurier. 
+## Tests unitaires
+Les tests unitaires sont implémentés pour les différents composants et services. Les tests utilisent le framework de test Jasmine et l'outil de test Karma pour l'exécution des tests.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Les tests sont organisés dans des fichiers séparés avec la convention suivante :
 
-## Code scaffolding
+`<nom-du-composant>.component.spec.ts` : Tests unitaires pour les composants.
+`<nom-du-service>.service.spec.ts` : Tests unitaires pour les services.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Pour lancer tout les tests du projets, veuillez entrer la commande `ng test`
 
-## Build
+## Commandes pour lancer le projet
+Pour lancer le projet, suivez les étapes suivantes :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Assurez-vous d'avoir `Node.js` et `Angular CLI` installés sur votre machine.
+- Clonez le projet depuis le dépôt Git.
+- Accédez au répertoire du projet dans votre terminal.
+- Exécutez la commande `npm install` pour installer les dépendances du projet.
+- Exécutez la commande `ng serve` pour démarrer le serveur de développement.
+- Ouvrez votre navigateur et accédez à `http://localhost:4200à pour voir l'application en cours d'exécution.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
