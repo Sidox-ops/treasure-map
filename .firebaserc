@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "treasuremapcarbonit": {
+      "hosting": {
+        "treasure-map": [
+          "treasuremapcarbonit"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "treasuremapcarbonit"
+  }
+}

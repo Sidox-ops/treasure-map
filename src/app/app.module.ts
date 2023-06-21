@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
 import { MapComponent } from './map/map.component';
 import { AdventurerComponent } from './adventurer/adventurer.component';
 import { InputFileComponent } from './input-file/input-file.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { InputFileComponent } from './input-file/input-file.component';
       { path: 'home', component: HomeComponent },
       { path: 'map', component: MapComponent },
 
-    ])
+    ]),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]
