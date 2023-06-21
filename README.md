@@ -37,3 +37,8 @@ Pour lancer le projet, suivez les étapes suivantes :
 -   Exécutez la commande `npm install` pour installer les dépendances du projet.
 -   Exécutez la commande `ng serve` pour démarrer le serveur de développement.
 -   Ouvrez votre navigateur et accédez à `http://localhost:4200à pour voir l'application en cours d'exécution.
+
+## Mise en production
+
+Grace à firebase j'ai pu mettre en production mon projet, vous pouvez le retrouver à l'adresse suivante : `https://treasuremapcarbonit.firebaseapp.com/`
+Je travaille aussi en bonus sur l'authentification avec firebase, que je serai ravi de vous montrer si je la finis à temps. 
