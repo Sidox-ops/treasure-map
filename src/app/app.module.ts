@@ -10,6 +10,7 @@ import { MapComponent } from './map/map.component';
 import { AdventurerComponent } from './adventurer/adventurer.component';
 import { InputFileComponent } from './input-file/input-file.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { InputFileComponent } from './input-file/input-file.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+
     AppRoutingModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },

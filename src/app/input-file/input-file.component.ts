@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MapService } from '../map/service/map.service';
-import { AdventureService } from '../adventurer/service/adventurer.service';
+import { AdventurerService } from '../adventurer/service/adventurer.service';
 
 @Component({
   selector: 'app-input-file',
@@ -8,7 +8,7 @@ import { AdventureService } from '../adventurer/service/adventurer.service';
   styleUrls: ['./input-file.component.css']
 })
 export class InputFileComponent {
-  constructor(private mapService: MapService, private adventureService: AdventureService) { }
+  constructor(private mapService: MapService, private adventureService: AdventurerService) { }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];

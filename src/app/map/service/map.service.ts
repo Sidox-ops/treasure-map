@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AdventureService } from 'src/app/adventurer/service/adventurer.service';
+import { AdventurerService } from 'src/app/adventurer/service/adventurer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class MapService {
   adventurers: any[] = [];
 
   constructor(//injection de adventureService
-    private adventureService: AdventureService
+    public adventureService: AdventurerService
   ) {
     // Appelons la fonction initializeMap dans le constructeur
     this.mapSubject.next(this.map); // Notifier de la nouvelle carte
@@ -96,7 +96,7 @@ export class MapService {
       y >= 0 &&
       y < this.map.length &&
       x < this.map[0].length &&
-      (this.map[y][x] === '.' || (this.map[y][x].type && this.map[y][x].type === 'T'))
+      (this.map[y][x] === '.' || (this.map[y][x].type && this.map[y][x].type === 'T' || this.map[y][x] === 'P'))
     );
   }
 

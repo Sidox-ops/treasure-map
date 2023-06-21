@@ -1,24 +1,53 @@
-<div
-    style="
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 12px;
-    "
->
-<form [formGroup]="adventureForm" (ngSubmit)="onSubmit()">
-  <textarea formControlName="adventureText"></textarea>
-  <button type="submit">Start Adventure</button>
+<div class="context-card">
+    <h2>Exercice pratique - La carte aux trésors</h2>
+    <p>
+        Guidez les aventuriers en quête de trésors ! Le gouvernement péruvien
+        vient d’autoriser les aventuriers en quête de trésors à explorer les 85
+        182 km2 du département de la Madre de Dios.
+        Bienvenue dans le simulateur d'expédition ! Entrez les paramètres de la carte, les montagnes éventuelles, le héros qui se lance à l'aventure et les trésors qui ne demandent qu'à être trouver.
+    </p>
+    <!-- Add more paragraphs as needed -->
+</div>
+
+<form [formGroup]="adventureForm" class="adventureForm" (ngSubmit)="onSubmit()">
+    <textarea formControlName="adventureText" rows="7"></textarea>
+    <button class="btn-101" type="submit">
+        ALLONS Y
+        <svg>
+            <defs>
+                <filter id="glow">
+                    <fegaussianblur
+                        result="coloredBlur"
+                        stddeviation="5"
+                    ></fegaussianblur>
+                    <femerge>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="coloredBlur"></femergenode>
+                        <femergenode in="SourceGraphic"></femergenode>
+                    </femerge>
+                </filter>
+            </defs>
+            <rect />
+        </svg>
+    </button>
 </form>
 
-<div *ngIf="adventureForm.get('adventureText')?.errors?.['noAdventurer']">
-  You must have at least one adventurer.
+<div
+    class="error"
+    *ngIf="adventureForm.get('adventureText')?.errors?.['noAdventurer']"
+>
+    Vous n'avez pas entré d'aventurier.
 </div>
-<div *ngIf="adventureForm.get('adventureText')?.errors?.['noTreasure']">
-  You must have at least one treasure.
+<div
+    class="error"
+    *ngIf="adventureForm.get('adventureText')?.errors?.['noTreasure']"
+>
+    Il n'y a pas de trésor sur votre map.
 </div>
 
-    <div role="grid">
+<div class="result">
+    <div class="grid">
         <div *ngFor="let row of map; let y = index" role="row">
             <div
                 *ngFor="let cell of row; let x = index"
@@ -48,7 +77,10 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf=this.adventureResult class="context-card" style="margin-top: 25px;">
+        {{ this.adventureResult }}
+    </div>
 </div>
-<div>
-    {{ this.adventureResult }}
-</div>
+
+<app-input-file></app-input-file>

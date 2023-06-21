@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from './service/map.service';
-import { AdventureService } from '../adventurer/service/adventurer.service';
+import { AdventurerService } from '../adventurer/service/adventurer.service';
 import { combineLatest } from 'rxjs';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
 
   constructor(
     private mapService: MapService,
-    private adventureService: AdventureService
+    private adventureService: AdventurerService
   ) { }
 
   ngOnInit(): void {
@@ -94,7 +94,16 @@ export class MapComponent implements OnInit {
         _adventurer = adventurer;
       }
     }
-    return 'Quelle belle aventure ! ' + _adventurer.name + ' a trouvé ' + _adventurer.treasures + ' trésors ! ' + _adventurer.name + " nous attend au point d'extraction " + _adventurer.x + '-' + _adventurer.y + ' !';
+    //switch selon la valeur de treasure
+    switch (_adventurer.treasures) {
+      case 0:
+        return 'Dommage ! ' + _adventurer.name + ' rentrera bredouille ! ' + _adventurer.name + " nous attend au point d'extraction " + _adventurer.x + '-' + _adventurer.y + ' !';
+      case 1:
+        return 'Quelle belle aventure ! ' + _adventurer.name + ' a trouvé ' + _adventurer.treasures + ' trésor ! ' + _adventurer.name + " nous attend au point d'extraction " + _adventurer.x + '-' + _adventurer.y + ' !';
+      default:
+        return 'Incroyable ! ' + _adventurer.name + ' a trouvé ' + _adventurer.treasures + ' trésors ! ' + _adventurer.name + " nous attend au point d'extraction " + _adventurer.x + '-' + _adventurer.y + ' !';
+    }
+
   }
 
   hasAdventurerValidator(control: AbstractControl): { [key: string]: any } | null {
@@ -104,8 +113,8 @@ export class MapComponent implements OnInit {
 
   adventureValidator(control: AbstractControl): { [key: string]: any } | null {
     const value = control.value;
-    if (value === null || value === undefined) {
-      return { 'noAdventurer': { value: 'No text provided' } };
+    if (value === null || value === undefined || value === '') {
+      return null;
     }
 
     const lines = value.split('\n');

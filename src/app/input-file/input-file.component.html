@@ -1,1 +1,29 @@
-<input type="file" (change)="onFileSelected($event)" accept=".txt" style="display: block; margin: auto;" />
+<input
+    class="btn-101"
+    type="file"
+    (change)="onFileSelected($event)"
+    accept=".txt"
+    style="display: none"
+    #fileInput
+/>
+<button class="btn-101" type="submit" (click)="fileInput.click()">
+    UPLOAD UNE CARTE
+    <svg>
+        <defs>
+            <filter id="glow">
+                <fegaussianblur
+                    result="coloredBlur"
+                    stddeviation="5"
+                ></fegaussianblur>
+                <femerge>
+                    <femergenode in="coloredBlur"></femergenode>
+                    <femergenode in="coloredBlur"></femergenode>
+                    <femergenode in="coloredBlur"></femergenode>
+                    <femergenode in="SourceGraphic"></femergenode>
+                </femerge>
+            </filter>
+        </defs>
+        <rect />
+    </svg>
+</button>
+

@@ -13,7 +13,7 @@ interface Adventurer {
 @Injectable({
   providedIn: 'root'
 })
-export class AdventureService {
+export class AdventurerService {
 
   private adventurersSubject = new Subject<Adventurer[]>();
   adventurers$ = this.adventurersSubject.asObservable();
